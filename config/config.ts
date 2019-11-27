@@ -161,6 +161,12 @@ export default {
                   icon: 'credit-card',
                   component: './drag-modal/',
                 },
+                {
+                  path: '/components/generate-form',
+                  name: '表单',
+                  icon: 'credit-card',
+                  component: './form/',
+                },
               ],
             },
             {
