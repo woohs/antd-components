@@ -1,88 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Card, Typography, Alert, Button, Form, Row, Col, DatePicker, Input } from 'antd';
-import moment from 'moment';
-import GenerateApp from '@/components/GenerateForm';
+import { Card, Typography, Form, Divider } from 'antd';
+import FormBase from './FormBase';
+import styles from './style.less';
+import FormAdvanced from './FormAdvanced';
 
-const { Title, Paragraph, Text } = Typography;
-const FormItem = Form.Item;
-const dateFormat = "YYYY-MM-DD";
+const { Paragraph, Text } = Typography;
 
-const App: React.FC = props => {
-
-  const { form } = props;
-
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 6 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 14 },
-      md: { span: 14 },
-    },
-  };
-
-  const initialRowValue = {
-    breachAmount: 1,
-    auditDate: "2019-01-01"
-  }
-
-  // formItem 数据
-  const formItemData = [
-    {
-      label: '违约金',
-      itemName: 'breachAmount',
-      rules: [
-        {
-          required: true,
-          message: '必填项',
-        },
-      ],
-      initialValue: initialRowValue && initialRowValue.breachAmount,
-      itemComponents: <Input placeholder="请输入" />,
-    },
-    {
-      label: '审核日期',
-      itemName: 'auditDate',
-      rules: [
-        {
-          required: true,
-          message: '必填项',
-        },
-      ],
-      initialValue:
-        initialRowValue && initialRowValue.auditDate
-          ? moment(initialRowValue.auditDate, dateFormat)
-          : moment(),
-      itemComponents: <DatePicker format={dateFormat} style={{ width: '100%' }} />,
-    },
-  ];
-
-  return (
-    <PageHeaderWrapper>
-      <Card>
-        <Typography>
-          <Title>
-            介绍
-          </Title>
-          <Paragraph>
-            封装表单组件，通过json数据格式，就可以生成表单
-          </Paragraph>
-        </Typography>
-
-        <Form className=".generate-advanced-search-form">
-          <GenerateApp 
-            form={form}
-            formItemData={formItemData}
-          />
-        </Form>
-      </Card>
-
-    </PageHeaderWrapper>
-  )
-}
+const App: React.FC = () => (
+  <PageHeaderWrapper>
+    <Card>
+      <Typography>
+        <Paragraph>封装表单组件，隐藏生成表单的程序细节，通过类json数据格式生成表单。</Paragraph>
+      </Typography>
+      <div className={styles.demoBox}>
+        <Text strong>基本类型表单</Text>
+        <Paragraph>通过栅格布局，分配表单项的布局样式</Paragraph>
+        <Divider />
+        <FormBase />
+      </div>
+      <div className={styles.demoBox}>
+        <Text strong>较复杂表单</Text>
+        <Paragraph>联动，弹窗取值，布局</Paragraph>
+        <Divider />
+        <FormAdvanced />
+      </div>
+    </Card>
+  </PageHeaderWrapper>
+);
 
 export default Form.create()(App);
-

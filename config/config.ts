@@ -57,54 +57,54 @@ const plugins: IPlugin[] = [
   ],
 ];
 
-if (isAntDesignProPreview) {
-  // 针对 preview.pro.ant.design 的 GA 统计代码
-  plugins.push([
-    'umi-plugin-ga',
-    {
-      code: 'UA-72788897-6',
-    },
-  ]);
-  plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
-}
+// if (isAntDesignProPreview) {
+//   // 针对 preview.pro.ant.design 的 GA 统计代码
+//   plugins.push([
+//     'umi-plugin-ga',
+//     {
+//       code: 'UA-72788897-6',
+//     },
+//   ]);
+//   plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
+// }
 
-if (!TEST && !isAntDesignProPreview) {
-  plugins.push([
-    'umi-plugin-antd-theme',
-    {
-      theme: [
-        {
-          key: 'dark',
-          fileName: 'dark.css',
-          theme: 'dark',
-        },
-        {
-          key: 'dust',
-          fileName: 'dust.css',
-          modifyVars: {
-            '@primary-color': '#F5222D',
-          },
-        },
-        {
-          key: 'dust',
-          theme: 'dark',
-          fileName: 'dark-dust.css',
-          modifyVars: {
-            '@primary-color': '#F5222D',
-          },
-        },
-        {
-          key: 'volcano',
-          theme: 'dark',
-          fileName: 'dark-volcano.css',
-          modifyVars: {
-            '@primary-color': '#FA541C',
-          },
-        },
-      ],
-    },
-  ]);
-}
+// if (!TEST && !isAntDesignProPreview) {
+//   plugins.push([
+//     'umi-plugin-antd-theme',
+//     {
+//       theme: [
+//         {
+//           key: 'dark',
+//           fileName: 'dark.css',
+//           theme: 'dark',
+//         },
+//         {
+//           key: 'dust',
+//           fileName: 'dust.css',
+//           modifyVars: {
+//             '@primary-color': '#F5222D',
+//           },
+//         },
+//         {
+//           key: 'dust',
+//           theme: 'dark',
+//           fileName: 'dark-dust.css',
+//           modifyVars: {
+//             '@primary-color': '#F5222D',
+//           },
+//         },
+//         {
+//           key: 'volcano',
+//           theme: 'dark',
+//           fileName: 'dark-volcano.css',
+//           modifyVars: {
+//             '@primary-color': '#FA541C',
+//           },
+//         },
+//       ],
+//     },
+//   ]);
+// }
 
 export default {
   plugins,
@@ -204,7 +204,7 @@ export default {
         resourcePath: string;
       },
       _: string,
-      localName: string
+      localName: string,
     ) => {
       if (
         context.resourcePath.includes('node_modules') ||
@@ -239,4 +239,3 @@ export default {
   //   },
   // },
 } as IConfig;
-

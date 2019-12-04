@@ -1,13 +1,24 @@
 import React from 'react';
-import { Row, Col, Form } from "antd";
+import { Row, Col, Form } from 'antd';
+
+export interface Props {
+  form: any;
+  formItemData: any;
+  formItemLayout?:
+    | {
+        labelCol: { xs: { span: number }; sm: { span: number } };
+        wrapperCol: { xs: { span: number }; sm: { span: number }; md: { span: number } };
+      }
+    | undefined;
+}
 
 const FormItem = Form.Item;
 
-const GenerateApp = (props: { form: any; formItemData: any; formItemLayout?: { labelCol: { xs: { span: number; }; sm: { span: number; }; }; wrapperCol: { xs: { span: number; }; sm: { span: number; }; md: { span: number; }; }; } | undefined; }) => {
-  const { 
-    form, 
-    formItemData, 
-    formItemLayout={
+const GenerateForm = (props: Props) => {
+  const {
+    form,
+    formItemData,
+    formItemLayout = {
       labelCol: {
         xs: { span: 24 },
         sm: { span: 6 },
@@ -23,12 +34,15 @@ const GenerateApp = (props: { form: any; formItemData: any; formItemLayout?: { l
 
   const getFields = (data: any[]) => {
     const children = [];
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i += 1) {
       const item = data[i];
+      // 表单项布局
+      const FormItemLayoutWrapper = item.formItemLayout ? item.formItemLayout : formItemLayout;
+
       if (!item.invisible) {
         children.push(
-          <Col xs={24} md={12} key={i}>
-            <FormItem {...formItemLayout} label={item.label}>
+          <Col xs={24} md={item.colSpan || 24} key={i}>
+            <FormItem {...FormItemLayoutWrapper} label={item.label}>
               {item.disableGetFieldDecorator
                 ? item.itemComponents
                 : getFieldDecorator(item.itemName, {
@@ -45,10 +59,7 @@ const GenerateApp = (props: { form: any; formItemData: any; formItemLayout?: { l
     return children;
   };
 
-  return (
-    <Row gutter={8}>{getFields(formItemData)}</Row>
-  )
-}
+  return <Row gutter={8}>{getFields(formItemData)}</Row>;
+};
 
-
-export default GenerateApp;
+export default GenerateForm;
