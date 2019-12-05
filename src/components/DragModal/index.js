@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable prefer-rest-params */
 import React from 'react';
@@ -156,7 +158,7 @@ class DragModal extends React.PureComponent {
         if (type === 'rightTop') {
           width = e.clientX - this.tLeft + 10;
           height = this.tBottom - e.clientY - 100;
-          if (height > 100) {
+          if (height > 10) {
             this.dragDom.style.top = `${e.clientY - 10}px`;
           }
         }
@@ -176,7 +178,7 @@ class DragModal extends React.PureComponent {
             modalWidth: width,
           });
         }
-        if (height > 100) {
+        if (height > 10) {
           this.dragDom.getElementsByClassName('ant-modal-body')[0].style.height = `${height}px`;
         }
       }
