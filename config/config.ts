@@ -167,6 +167,12 @@ export default {
                   icon: 'credit-card',
                   component: './form/',
                 },
+                {
+                  path: '/components/upload',
+                  name: '上传组件',
+                  icon: 'credit-card',
+                  component: './upload/',
+                },
               ],
             },
             {
