@@ -4,7 +4,7 @@ import { Card, Typography, Button } from 'antd';
 import DragModal from '@/components/DragModal';
 import DemoBox from '@/components/DemoBox';
 
-const { Paragraph, Text } = Typography;
+const { Paragraph } = Typography;
 
 const App: React.FC = () => {
   const [state, setState] = useState({
@@ -17,9 +17,10 @@ const App: React.FC = () => {
         <Typography>
           <Paragraph>对弹窗组件进行二次封装，支持拖拽、放大缩小功能。</Paragraph>
         </Typography>
-        <DemoBox>
-          <Text strong>基本类型弹窗</Text>
-          <Paragraph>展示简单的内容，可通过弹窗的右上角、右下角、左下角进行拖拽放大缩小</Paragraph>
+        <DemoBox
+          title="基本类型弹窗"
+          paragraph="展示简单的内容，可通过弹窗的右上角、右下角、左下角进行拖拽放大缩小"
+        >
           <Button onClick={() => setState({ visible: true })}>打开弹窗</Button>
         </DemoBox>
       </Card>

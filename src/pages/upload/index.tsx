@@ -5,7 +5,7 @@ import UploadFile from '@/components/UploadFile';
 import DemoBox from '@/components/DemoBox';
 import { UploadListType } from 'antd/lib/upload/interface';
 
-const { Paragraph, Text } = Typography;
+const { Paragraph } = Typography;
 
 const UploadFileList = () => {
   // 文件 state
@@ -96,9 +96,7 @@ const App: React.FC = () => (
       <Typography>
         <Paragraph>封装上传组件，传入几个关键参数就可完成上传功能。</Paragraph>
       </Typography>
-      <DemoBox>
-        <Text strong>点击上传</Text>
-        <Paragraph>不展示文件列表</Paragraph>
+      <DemoBox title="点击上传" paragraph="不展示文件列表">
         <UploadFile
           uploadName="file"
           url="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -113,14 +111,10 @@ const App: React.FC = () => (
           buttonType="primary"
         />
       </DemoBox>
-      <DemoBox>
-        <Text strong>已上传文件列表</Text>
-        <Paragraph>展示默认上传文件和已上传文件列表</Paragraph>
+      <DemoBox title="已上传文件列表" paragraph="展示默认上传文件和已上传文件列表">
         <UploadFileList />
       </DemoBox>
-      <DemoBox>
-        <Text strong>预览图片</Text>
-        <Paragraph>用户可以上传图片并在列表中显示缩略图。</Paragraph>
+      <DemoBox title="预览图片" paragraph="用户可以上传图片并在列表中显示缩略图。">
         <UploadFilePicture />
       </DemoBox>
     </Card>

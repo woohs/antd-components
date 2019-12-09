@@ -173,6 +173,12 @@ export default {
                   icon: 'credit-card',
                   component: './upload/',
                 },
+                {
+                  path: '/components/table-edit',
+                  name: '列表',
+                  icon: 'credit-card',
+                  component: './EditTable/',
+                },
               ],
             },
             {
