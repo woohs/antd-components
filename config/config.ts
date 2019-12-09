@@ -242,7 +242,9 @@ export default {
   },
   manifest: {
     basePath: '/',
-  }, // chainWebpack: webpackPlugin,
+  },
+  outputPath: './build',
+  // chainWebpack: webpackPlugin,
   // proxy: {
   //   '/server/api/': {
   //     target: 'https://preview.pro.ant.design/',
