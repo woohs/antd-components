@@ -244,6 +244,7 @@ export default {
     basePath: '/',
   },
   outputPath: './build',
+  publicPath: '/antd-components/',
   // chainWebpack: webpackPlugin,
   // proxy: {
   //   '/server/api/': {
