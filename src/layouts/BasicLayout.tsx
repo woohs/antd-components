@@ -22,6 +22,7 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
 import logo from '../assets/logo.svg';
+import TabPages from '@/components/TabPages';
 
 const noMatch = (
   <Result
@@ -45,6 +46,7 @@ export interface BasicLayoutProps extends ProLayoutProps {
   };
   settings: Settings;
   dispatch: Dispatch;
+  match: any;
 }
 export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
   breadcrumbNameMap: {
@@ -116,13 +118,25 @@ const footerRender: BasicLayoutProps['footerRender'] = () => {
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, settings, location = { pathname: '/' } } = props;
+  const { dispatch, settings, route: projectRoute, match, location = { pathname: '/' } } = props;
+
   /**
    * constructor
    */
 
   useEffect(() => {
     if (dispatch) {
+      // 设置routes
+      dispatch({
+        type: 'tabPages/setState',
+        payload: {
+          routerData: projectRoute.routes,
+        },
+      });
+      // 触发修改页面
+      dispatch({
+        type: 'tabPages/changePage',
+      });
       dispatch({
         type: 'user/fetchCurrent',
       });
@@ -185,11 +199,13 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       menuDataRender={menuDataRender}
       // formatMessage={formatMessage}
       rightContentRender={rightProps => <RightContent {...rightProps} />}
+      siderWidth={200}
       {...props}
       {...settings}
     >
       <Authorized authority={authorized!.authority} noMatch={noMatch}>
-        {children}
+        <TabPages location={location} match={match} />
+        {/* {children} */}
       </Authorized>
     </ProLayout>
   );
