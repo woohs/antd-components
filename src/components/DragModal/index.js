@@ -19,6 +19,17 @@ const genNonDuplicateID = length =>
       .substr(3, length) + Date.now(),
   ).toString(36);
 
+// 防抖函数
+const throttle = (cb, delay = 10) => {
+  const _this = this;
+  let now = Date.now();
+  return function fn() {
+    if (Date.now() - now < delay) return;
+    cb && cb.apply(_this, arguments);
+    now = Date.now();
+  };
+};
+
 class DragModal extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -63,35 +74,9 @@ class DragModal extends React.PureComponent {
     });
   };
 
-  // 防抖函数
-  throttle = (cb, delay = 10) => {
-    const _this = this;
-    let now = Date.now();
-    return function fn() {
-      if (Date.now() - now < delay) return;
-      cb && cb.apply(_this, arguments);
-      now = Date.now();
-    };
-  };
-
   onMouseDown = e => {
     e.preventDefault();
     this.dragging = true; // 激活拖拽状态
-    /*
-     ** 实现点击后，当前浮层在最上面
-     ** 将当前所有涉及可拖拽的浮层的 zindex = 999
-     ** 将当前拖拽目标的 zindex = 1000
-     *
-     *  目前不需要多窗口
-     * */
-    // const nodeList = document.getElementsByClassName("drag_modal");
-    // if (nodeList.length > 0) {
-    //   Array.from(nodeList).forEach(item => {
-    //     item.style.zIndex = 999
-    //   });
-    //   this.dragDom.style.zIndex = 1000;
-    // }
-
     /*
      * getBoundingClientRect: 返回一个 DomRect 对象
      *   包含该元素的 top、right、bottom、left 值，对应的是到屏幕上方和左边的距离，单位 px
@@ -122,7 +107,7 @@ class DragModal extends React.PureComponent {
         currentNode.style.top = `${e.clientY - this.tTop}px`;
       }
     }
-    const throttleScroll = this.throttle(setModal);
+    const throttleScroll = throttle(setModal);
 
     document.onmousemove = e => {
       e.preventDefault();
@@ -184,7 +169,7 @@ class DragModal extends React.PureComponent {
       }
     }
 
-    const throttleScroll = this.throttle(setModal);
+    const throttleScroll = throttle(setModal);
 
     document.onmousemove = e => {
       e.preventDefault();
